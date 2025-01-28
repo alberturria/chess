@@ -21,4 +21,8 @@ export class Square {
 	public toString(): string {
 		return `${this._column}${this._row}`;
 	}
+
+	public equals(square: Square): boolean {
+		return this._column === square.column && this._row === square.row;
+	}
 }

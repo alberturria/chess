@@ -18,6 +18,10 @@ const main = () => {
 	console.log("GAME CREATED");
 	const currentBoardStatus = game.getGameStatus();
 	console.log(currentBoardStatus);
+
+	const firstWhitePawn = game.getFigurebySquare(new Square("A", 2));
+	console.log(firstWhitePawn.getCurrentStatus());
+	console.log("Available moves for the first white pawn:" + firstWhitePawn.getAvailableMoves());
 };
 
 // TODO: Check where the initialization of the game should be palced.

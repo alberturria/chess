@@ -9,4 +9,8 @@ export class Rook extends Figure {
 	move(square: Square): void {
 		throw new Error("Method not implemented.");
 	}
+
+	getAvailableMoves(): Square[] | undefined {
+		throw new Error("Method not implemented.");
+	}
 }

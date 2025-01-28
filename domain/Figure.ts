@@ -15,10 +15,16 @@ export abstract class Figure {
 	}
 
 	abstract move(square: Square): void;
-	public getCurrentSquare(): Square {
+	abstract getAvailableMoves(): Square[] | undefined;
+
+	get color() {
+		return this._color;
+	}
+
+	get square(): Square {
 		return this._square;
 	}
 	public getCurrentStatus(): string {
-		return `${this.getCurrentSquare().toString()} - ${this._color} ${this._type}`;
+		return `${this.square.toString()} - ${this._color} ${this._type}`;
 	}
 }
