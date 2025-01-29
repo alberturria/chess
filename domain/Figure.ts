@@ -24,6 +24,11 @@ export abstract class Figure {
 	get square(): Square {
 		return this._square;
 	}
+
+	protected set square(square: Square) {
+		this._square = square;
+	}
+	
 	public getCurrentStatus(): string {
 		return `${this.square.toString()} - ${this._color} ${this._type}`;
 	}

@@ -7,7 +7,10 @@ export class Pawn extends Figure {
 	}
 
 	move(square: Square): void {
-		throw new Error("Method not implemented.");
+		const availableMoves = this.getAvailableMoves();
+		if (availableMoves?.find((square) => square.equals(square))) {
+			super.square = square;
+		}
 	}
 
 	public getAvailableMoves(): Square[] | undefined {

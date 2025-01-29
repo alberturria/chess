@@ -22,6 +22,8 @@ const main = () => {
 	const firstWhitePawn = game.getFigurebySquare(new Square("A", 2));
 	console.log(firstWhitePawn.getCurrentStatus());
 	console.log("Available moves for the first white pawn:" + firstWhitePawn.getAvailableMoves());
+	firstWhitePawn.move(new Square("A", 3));
+	console.log(firstWhitePawn.getCurrentStatus());
 };
 
 // TODO: Check where the initialization of the game should be palced.
