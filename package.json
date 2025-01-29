@@ -1,0 +1,28 @@
+{
+	"name": "chess",
+	"version": "1.0.0",
+	"description": "Chess game to practice OOP concepts",
+	"main": "application/main.ts",
+	"scripts": {
+		"test": "jest",
+		"start": "ts-node application/main.ts"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alberturria/chess.git"
+	},
+	"keywords": [
+		"chess"
+	],
+	"author": "Alberto Herrera",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/alberturria/chess/issues"
+	},
+	"homepage": "https://github.com/alberturria/chess#readme",
+	"devDependencies": {
+		"@types/jest": "^29.5.14",
+		"jest": "^29.7.0",
+		"ts-node": "^10.9.2"
+	}
+}
