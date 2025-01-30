@@ -1,3 +1,4 @@
+import { Game } from "./Game";
 import { Square } from "./Square";
 
 export type Color = "white" | "black";
@@ -14,7 +15,7 @@ export abstract class Figure {
 		this._type = type;
 	}
 
-	abstract move(square: Square): void;
+	abstract move(square: Square, game: Game): void;
 	abstract getAvailableMoves(): Square[] | undefined;
 
 	get color() {
@@ -28,7 +29,7 @@ export abstract class Figure {
 	protected set square(square: Square) {
 		this._square = square;
 	}
-	
+
 	public getCurrentStatus(): string {
 		return `${this.square.toString()} - ${this._color} ${this._type}`;
 	}

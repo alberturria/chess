@@ -1,4 +1,5 @@
 import { Color, Figure } from "./Figure";
+import { Game } from "./Game";
 import { Square } from "./Square";
 
 export class Pawn extends Figure {
@@ -6,32 +7,54 @@ export class Pawn extends Figure {
 		super(square, color, "pawn");
 	}
 
-	move(square: Square): void {
+	move(newSquare: Square, game: Game): void {
 		const availableMoves = this.getAvailableMoves();
-		if (availableMoves?.find((square) => square.equals(square))) {
-			super.square = square;
+		if (availableMoves?.find((square) => newSquare.equals(square))) {
+			super.square = newSquare;
 		}
 	}
 
 	public getAvailableMoves(): Square[] | undefined {
 		if (this.color === "white") {
-			if (this.square.row === 2) {
-				return [new Square(this.square.column, 3), new Square(this.square.column, 4)];
-			}
 			if (this.square.row === 8) {
 				return [];
 			}
-			return [new Square(this.square.column, (this.square.row + 1) as Square["row"])]; // TODO: Avoid casting these Rows
+			
+			const diagonalSquares = [
+				this.square.copySquareAbove()?.copySquareLeft(),
+				this.square.copySquareAbove()?.copySquareRight(),
+			].filter((square) => square !== undefined);
+			if (this.square.row === 2) {
+				return [
+					this.square.copySquareAbove(),
+					this.square.copySquareAbove()?.copySquareAbove(),
+					...diagonalSquares,
+				].filter((square) => square !== undefined);
+			}
+
+			return [this.square.copySquareAbove(), ...diagonalSquares].filter(
+				(square) => square !== undefined
+			);
 		}
 
 		if (this.color === "black") {
-			if (this.square.row === 7) {
-				return [new Square(this.square.column, 6), new Square(this.square.column, 5)];
-			}
 			if (this.square.row === 1) {
 				return [];
 			}
-			return [new Square(this.square.column, (this.square.row - 1) as Square["row"])];
+			const diagonalSquares = [
+				this.square.copySquareBelow()?.copySquareLeft(),
+				this.square.copySquareBelow()?.copySquareRight(),
+			].filter((square) => square !== undefined);
+			if (this.square.row === 7) {
+				return [
+					this.square.copySquareBelow(),
+					this.square.copySquareBelow()?.copySquareBelow(),
+					...diagonalSquares,
+				].filter((square) => square !== undefined);
+			}
+			return [this.square.copySquareBelow(), ...diagonalSquares].filter(
+				(square) => square !== undefined
+			);
 		}
 	}
 }
