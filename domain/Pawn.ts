@@ -9,9 +9,12 @@ export class Pawn extends Figure {
 
 	move(newSquare: Square, game: Game): void {
 		const availableMoves = this.getAvailableMoves();
-		if (availableMoves?.find((square) => newSquare.equals(square))) {
-			super.square = newSquare;
+		const isMoveValid = !!availableMoves?.find((square) => newSquare.equals(square));
+
+		if (!isMoveValid) {
+			throw new Error("Invalid move");
 		}
+		super.square = newSquare;
 	}
 
 	public getAvailableMoves(): Square[] | undefined {
@@ -19,7 +22,7 @@ export class Pawn extends Figure {
 			if (this.square.row === 8) {
 				return [];
 			}
-			
+
 			const diagonalSquares = [
 				this.square.copySquareAbove()?.copySquareLeft(),
 				this.square.copySquareAbove()?.copySquareRight(),
