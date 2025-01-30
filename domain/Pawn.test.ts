@@ -29,4 +29,14 @@ describe("Pawn", () => {
 
 		expect(pawn.square).toEqual(new Square("B", 3));
 	});
+
+	it('should allow moving a black pawn on "backward diagonal" when there is an oponent piece there', () => {
+		const pawn = new Pawn(new Square("B", 7), "black");
+		const oponentPawn = new Pawn(new Square("A", 6), "white");
+		const game = new Game([pawn, oponentPawn]);
+
+		pawn.move(new Square("A", 6), game);
+
+		expect(pawn.square).toEqual(new Square("A", 6));
+	});
 });
