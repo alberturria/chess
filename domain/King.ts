@@ -1,4 +1,5 @@
 import { Color, Figure } from "./Figure";
+import { Game } from "./Game";
 import { Square } from "./Square";
 
 export class King extends Figure {
@@ -6,7 +7,7 @@ export class King extends Figure {
 		super(square, color, "king");
 	}
 
-	move(square: Square): void {
+	move(square: Square, game: Game): void {
 		throw new Error("Method not implemented.");
 	}
 	getAvailableMoves(): Square[] | undefined {
