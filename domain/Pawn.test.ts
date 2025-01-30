@@ -39,4 +39,14 @@ describe("Pawn", () => {
 
 		expect(pawn.square).toEqual(new Square("A", 6));
 	});
+
+	it('should throw an error when trying to move a white pawn on "backward diagonal"', () => {
+		const pawn = new Pawn(new Square("A", 3), "white");
+		const oponentPawn = new Pawn(new Square("B", 2), "black");
+		const game = new Game([pawn, oponentPawn]);
+
+		const action = () => pawn.move(new Square("A", 3), game);
+
+		expect(action).toThrow(new Error("Invalid move"));
+	});
 });
