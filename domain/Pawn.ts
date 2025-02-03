@@ -29,7 +29,7 @@ export class Pawn extends Figure {
 				this.square.copySquareAbove()?.copySquareRight(),
 			]
 				.filter(isDefined)
-				.filter((square) => game.getFigureBySquareAndColor(square, 'black') !== undefined);
+				.filter((square) => game.getFigureBySquareAndColor(square, "black") !== undefined);
 			if (this.square.row === 2) {
 				return [
 					this.square.copySquareAbove(),
@@ -50,21 +50,23 @@ export class Pawn extends Figure {
 			if (this.square.row === 1) {
 				return [];
 			}
-			const diagonalSquares = [
+			const diagonalAvailableSquares = [
 				this.square.copySquareBelow()?.copySquareLeft(),
 				this.square.copySquareBelow()?.copySquareRight(),
-			].filter(isDefined);
+			]
+				.filter(isDefined)
+				.filter((square) => game.getFigureBySquareAndColor(square, "white") !== undefined);
 			if (this.square.row === 7) {
 				return [
 					this.square.copySquareBelow(),
 					this.square.copySquareBelow()?.copySquareBelow(),
-					...diagonalSquares,
+					...diagonalAvailableSquares,
 				]
 					.filter(isDefined)
 					.filter((square) => game.getFigureBySquareAndColor(square, this.color) === undefined)
 					.filter(isDefined);
 			}
-			return [this.square.copySquareBelow(), ...diagonalSquares]
+			return [this.square.copySquareBelow(), ...diagonalAvailableSquares]
 				.filter(isDefined)
 				.filter((square) => game.getFigureBySquareAndColor(square, this.color) === undefined)
 				.filter(isDefined);
