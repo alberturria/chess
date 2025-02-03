@@ -52,10 +52,20 @@ describe("Pawn", () => {
 
 	it("should not allow moving a white pawn from A3 to A4 if there is a piece on A4", () => {
 		const pawn = new Pawn(new Square("A", 3), "white");
-		const oponentPawn = new Pawn(new Square("A", 4), "white");
-		const game = new Game([pawn, oponentPawn]);
+		const allyPawn = new Pawn(new Square("A", 4), "white");
+		const game = new Game([pawn, allyPawn]);
 
 		const action = () => pawn.move(new Square("A", 4), game);
+
+		expect(action).toThrow(new Error("Invalid move"));
+	});
+
+	it("should not allow moving a black pawn from B6 to B5 if there is a piece on B5", () => {
+		const pawn = new Pawn(new Square("B", 6), "black");
+		const allyPawn = new Pawn(new Square("B", 5), "black");
+		const game = new Game([pawn, allyPawn]);
+
+		const action = () => pawn.move(new Square("B", 5), game);
 
 		expect(action).toThrow(new Error("Invalid move"));
 	});

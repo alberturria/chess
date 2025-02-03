@@ -57,9 +57,15 @@ export class Pawn extends Figure {
 					this.square.copySquareBelow(),
 					this.square.copySquareBelow()?.copySquareBelow(),
 					...diagonalSquares,
-				].filter(isDefined);
+				]
+					.filter(isDefined)
+					.filter((square) => game.getFigureBySquareAndColor(square, this.color) === undefined)
+					.filter(isDefined);
 			}
-			return [this.square.copySquareBelow(), ...diagonalSquares].filter(isDefined);
+			return [this.square.copySquareBelow(), ...diagonalSquares]
+				.filter(isDefined)
+				.filter((square) => game.getFigureBySquareAndColor(square, this.color) === undefined)
+				.filter(isDefined);
 		}
 	}
 }
