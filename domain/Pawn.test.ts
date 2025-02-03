@@ -70,12 +70,21 @@ describe("Pawn", () => {
 		expect(action).toThrow(new Error("Invalid move"));
 	});
 
-	it('should not allow moving on diagonal a white pawn when there are no opnent pieces there', () => {
+	it("should not allow moving on diagonal a white pawn when there are no opnent pieces there", () => {
 		const pawn = new Pawn(new Square("A", 2), "white");
 		const game = new Game([pawn]);
 
 		const action = () => pawn.move(new Square("B", 3), game);
 
 		expect(action).toThrow(new Error("Invalid move"));
-	})
+	});
+
+	it("should not allow moving on diagonal a black pawn when there are no opnent pieces there", () => {
+		const pawn = new Pawn(new Square("B", 7), "black");
+		const game = new Game([pawn]);
+
+		const action = () => pawn.move(new Square("A", 6), game);
+
+		expect(action).toThrow(new Error("Invalid move"));
+	});
 });
