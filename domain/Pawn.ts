@@ -1,3 +1,4 @@
+import { isDefined } from "../ts-utils";
 import { Color, Figure } from "./Figure";
 import { Game } from "./Game";
 import { Square } from "./Square";
@@ -26,21 +27,21 @@ export class Pawn extends Figure {
 			const diagonalSquares = [
 				this.square.copySquareAbove()?.copySquareLeft(),
 				this.square.copySquareAbove()?.copySquareRight(),
-			].filter((square) => square !== undefined);
+			].filter(isDefined);
 			if (this.square.row === 2) {
 				return [
 					this.square.copySquareAbove(),
 					this.square.copySquareAbove()?.copySquareAbove(),
 					...diagonalSquares,
-				].filter((square) => square !== undefined);
+				].filter(isDefined);
 			}
 
 			return [this.square.copySquareAbove(), ...diagonalSquares]
 				.filter(
 					(square) =>
-						square !== undefined && game.getFigureBySquareAndColor(square, this.color) === undefined
+						isDefined(square) && game.getFigureBySquareAndColor(square, this.color) === undefined
 				)
-				.filter((square) => square !== undefined);
+				.filter(isDefined);
 		}
 
 		if (this.color === "black") {
@@ -50,17 +51,15 @@ export class Pawn extends Figure {
 			const diagonalSquares = [
 				this.square.copySquareBelow()?.copySquareLeft(),
 				this.square.copySquareBelow()?.copySquareRight(),
-			].filter((square) => square !== undefined);
+			].filter(isDefined);
 			if (this.square.row === 7) {
 				return [
 					this.square.copySquareBelow(),
 					this.square.copySquareBelow()?.copySquareBelow(),
 					...diagonalSquares,
-				].filter((square) => square !== undefined);
+				].filter(isDefined);
 			}
-			return [this.square.copySquareBelow(), ...diagonalSquares].filter(
-				(square) => square !== undefined
-			);
+			return [this.square.copySquareBelow(), ...diagonalSquares].filter(isDefined);
 		}
 	}
 }
