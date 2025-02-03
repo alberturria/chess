@@ -24,19 +24,21 @@ export class Pawn extends Figure {
 				return [];
 			}
 
-			const diagonalSquares = [
+			const diagonalAvailableSquares = [
 				this.square.copySquareAbove()?.copySquareLeft(),
 				this.square.copySquareAbove()?.copySquareRight(),
-			].filter(isDefined);
+			]
+				.filter(isDefined)
+				.filter((square) => game.getFigureBySquareAndColor(square, 'black') !== undefined);
 			if (this.square.row === 2) {
 				return [
 					this.square.copySquareAbove(),
 					this.square.copySquareAbove()?.copySquareAbove(),
-					...diagonalSquares,
+					...diagonalAvailableSquares,
 				].filter(isDefined);
 			}
 
-			return [this.square.copySquareAbove(), ...diagonalSquares]
+			return [this.square.copySquareAbove(), ...diagonalAvailableSquares]
 				.filter(
 					(square) =>
 						isDefined(square) && game.getFigureBySquareAndColor(square, this.color) === undefined

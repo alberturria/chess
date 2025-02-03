@@ -1,4 +1,4 @@
-import { Figure } from "./Figure";
+import { Color, Figure } from "./Figure";
 import { Square } from "./Square";
 
 export class Game {
@@ -25,7 +25,7 @@ export class Game {
 		}
 	}
 
-	public getFigureBySquareAndColor(square: Square, color: string): Figure | undefined {
+	public getFigureBySquareAndColor(square: Square, color: Color): Figure | undefined {
 		const figure = this.getFigurebySquare(square);
 		if (figure?.color === color) {
 			return figure;
