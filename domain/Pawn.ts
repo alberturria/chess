@@ -8,7 +8,7 @@ export class Pawn extends Figure {
 	}
 
 	move(newSquare: Square, game: Game): void {
-		const availableMoves = this.getAvailableMoves();
+		const availableMoves = this.getAvailableMoves(game);
 		const isMoveValid = !!availableMoves?.find((square) => newSquare.equals(square));
 
 		if (!isMoveValid) {
@@ -17,7 +17,7 @@ export class Pawn extends Figure {
 		super.square = newSquare;
 	}
 
-	public getAvailableMoves(): Square[] | undefined {
+	public getAvailableMoves(game: Game): Square[] | undefined {
 		if (this.color === "white") {
 			if (this.square.row === 8) {
 				return [];
@@ -35,9 +35,12 @@ export class Pawn extends Figure {
 				].filter((square) => square !== undefined);
 			}
 
-			return [this.square.copySquareAbove(), ...diagonalSquares].filter(
-				(square) => square !== undefined
-			);
+			return [this.square.copySquareAbove(), ...diagonalSquares]
+				.filter(
+					(square) =>
+						square !== undefined && game.getFigureBySquareAndColor(square, this.color) === undefined
+				)
+				.filter((square) => square !== undefined);
 		}
 
 		if (this.color === "black") {

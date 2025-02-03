@@ -16,7 +16,7 @@ export abstract class Figure {
 	}
 
 	abstract move(square: Square, game: Game): void;
-	abstract getAvailableMoves(): Square[] | undefined;
+	abstract getAvailableMoves(game: Game): Square[] | undefined;
 
 	get color() {
 		return this._color;

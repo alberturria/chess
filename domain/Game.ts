@@ -18,11 +18,17 @@ export class Game {
 		throw new Error("Not implemented!");
 	}
 
-	public getFigurebySquare(square: Square): Figure {
+	public getFigurebySquare(square: Square): Figure | undefined {
 		const figure = this.figures.find((figure) => figure.square.equals(square));
-		if (!figure) {
-			throw new Error("No figure found on the provided square");
+		if (figure) {
+			return figure;
 		}
-		return figure;
+	}
+
+	public getFigureBySquareAndColor(square: Square, color: string): Figure | undefined {
+		const figure = this.getFigurebySquare(square);
+		if (figure?.color === color) {
+			return figure;
+		}
 	}
 }
