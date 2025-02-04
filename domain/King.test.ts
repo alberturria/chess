@@ -21,4 +21,14 @@ describe("King", () => {
 
 		expect(action).toThrow(new Error("Invalid move"));
 	});
+
+	it('should allow moving the king "forward diagonal" when there is an oponent piece there', () => {
+		const king = new King(new Square("E", 1), "white");
+		const oponentKing = new King(new Square("F", 2), "black");
+		const game = new Game([king, oponentKing]);
+
+		king.move(new Square("F", 2), game);
+
+		expect(king.square).toEqual(new Square("F", 2));
+	});
 });
