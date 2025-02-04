@@ -31,4 +31,14 @@ describe("King", () => {
 
 		expect(king.square).toEqual(new Square("F", 2));
 	});
+
+	it('should not allow moving the king "forward diagonal" when there is an ally piece there', () => {
+		const king = new King(new Square("E", 1), "white");
+		const allyPawn = new King(new Square("F", 2), "white");
+		const game = new Game([king, allyPawn]);
+
+		const action = () => king.move(new Square("F", 2), game);
+
+		expect(action).toThrow(new Error("Invalid move"));
+	});
 });
