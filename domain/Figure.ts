@@ -22,6 +22,10 @@ export abstract class Figure {
 		return this._color;
 	}
 
+	public getOponentColor() {
+		return this._color === "white" ? "black" : "white";
+	}
+
 	get square(): Square {
 		return this._square;
 	}
