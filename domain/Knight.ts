@@ -22,7 +22,10 @@ export class Knight extends Figure {
 			this.square.copySquareBelow()?.copySquareLeft()?.copySquareLeft(),
 			this.square.copySquareLeft()?.copySquareBelow()?.copySquareBelow(),
 			this.square.copySquareLeft()?.copySquareAbove()?.copySquareAbove(),
-		];
+		]
+			.filter(isDefined)
+			.filter((square) => game.getFigureBySquareAndColor(square, this.color) === undefined);
+
 		return availableMoves.filter(isDefined);
 	}
 }
