@@ -11,6 +11,13 @@ describe("Knight", () => {
 
 		expect(moves).toEqual(expect.arrayContaining([new Square("A", 3), new Square("C", 3)]));
 	});
-	
 
+	it("should get all the possible initial black moves", () => {
+		const knight = new Knight(new Square("B", 8), "black");
+		const game = new Game([knight]);
+
+		const moves = knight.getAvailableMoves(game);
+
+		expect(moves).toEqual(expect.arrayContaining([new Square("A", 6), new Square("C", 6)]));
+	});
 });
