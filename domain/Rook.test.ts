@@ -29,7 +29,7 @@ describe("Rook", () => {
 		);
 	});
 
-	it.only("should get as available moves all the squares in the same row and column until the first piece when there is an oponent piece blocking the way", () => {
+	it("should get as available moves all the squares in the same row and column until the first piece when there is an oponent piece blocking the way", () => {
 		const rook = new Rook(new Square("D", 4), "white");
 		const oponentPawn = new Rook(new Square("E", 4), "black");
 		const game = new Game([rook, oponentPawn]);
