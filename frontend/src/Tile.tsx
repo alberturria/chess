@@ -13,18 +13,25 @@ import WhiteKing from "./assets/figures/white/king.svg";
 import BlackKing from "./assets/figures/black/king.svg";
 
 import { Figure } from "../domain/Figure";
+import { Game } from "../domain/Game";
 
 type Props = {
 	col: string;
 	row: string;
 	isDark: boolean;
 	figure: Figure | undefined;
+	game: Game;
 };
 
-export default function Tile({ col, row, isDark, figure }: Props) {
+export default function Tile({ col, row, isDark, figure, game }: Props) {
 	const svg = getSVG(figure);
+
 	return (
-		<div key={`${col}${row}`} className={`square ${isDark ? "dark" : "light"}`}>
+		<div
+			key={`${col}${row}`}
+			className={`square ${isDark ? "dark" : "light"}`}
+			onClick={() => handleClick(game, figure)}
+		>
 			{figure ? <div className={`figure ${figure.color} ${figure.type}`}></div> : null}
 
 			{svg ? <img src={svg}></img> : null}
@@ -49,6 +56,11 @@ const getSVG = (figure: Figure | undefined) => {
 			return figure.color === "white" ? WhiteQueen : BlackQueen;
 		case "king":
 			return figure.color === "white" ? WhiteKing : BlackKing;
-      
+	}
+};
+
+const handleClick = (game: Game, figure: Figure | undefined) => {
+	if (figure) {
+		console.log(figure.getAvailableMoves(game));
 	}
 };

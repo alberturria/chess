@@ -18,7 +18,16 @@ export default function Chessboard() {
 						// eslint-disable-next-line @typescript-eslint/no-explicit-any
 						new Square(col.toUpperCase() as any, parseInt(row) as any)
 					);
-					return <Tile key={`${col}${row}`} col={col} row={row} isDark={isDark} figure={figure} />;
+					return (
+						<Tile
+							key={`${col}${row}`}
+							col={col}
+							row={row}
+							isDark={isDark}
+							figure={figure}
+							game={game}
+						/>
+					);
 				})
 			)}
 		</div>
