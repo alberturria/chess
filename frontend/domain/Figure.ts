@@ -37,4 +37,8 @@ export abstract class Figure {
 	public getCurrentStatus(): string {
 		return `${this.square.toString()} - ${this._color} ${this._type}`;
 	}
+
+	get type(): FigureType {
+		return this._type;
+	}
 }
