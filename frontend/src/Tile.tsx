@@ -14,6 +14,7 @@ import BlackKing from "./assets/figures/black/king.svg";
 
 import { Figure } from "../domain/Figure";
 import { Game } from "../domain/Game";
+import { Square } from "../domain/Square";
 
 type Props = {
 	col: string;
@@ -21,17 +22,37 @@ type Props = {
 	isDark: boolean;
 	figure: Figure | undefined;
 	game: Game;
+	isPossibleToMove: boolean;
+	onMoveSelected: (tiles: Square[]) => void;
 };
 
-export default function Tile({ col, row, isDark, figure, game }: Props) {
+export default function Tile({
+	col,
+	row,
+	isDark,
+	isPossibleToMove,
+	figure,
+	game,
+	onMoveSelected,
+}: Props) {
 	const svg = getSVG(figure);
 
+	const handleClick = (game: Game, figure: Figure | undefined): Square[] | undefined => {
+		if (figure) {
+			const availableMoves = figure.getAvailableMoves(game);
+			onMoveSelected(availableMoves ?? []);
+		}
+		return [];
+	};
+	let className;
+	if (isPossibleToMove) {
+		className = "square possible-move opacity";
+	} else {
+		className = isDark ? "square dark" : "square light";
+	}
+
 	return (
-		<div
-			key={`${col}${row}`}
-			className={`square ${isDark ? "dark" : "light"}`}
-			onClick={() => handleClick(game, figure)}
-		>
+		<div key={`${col}${row}`} className={className} onClick={() => handleClick(game, figure)}>
 			{figure ? <div className={`figure ${figure.color} ${figure.type}`}></div> : null}
 
 			{svg ? <img src={svg}></img> : null}
@@ -56,11 +77,5 @@ const getSVG = (figure: Figure | undefined) => {
 			return figure.color === "white" ? WhiteQueen : BlackQueen;
 		case "king":
 			return figure.color === "white" ? WhiteKing : BlackKing;
-	}
-};
-
-const handleClick = (game: Game, figure: Figure | undefined) => {
-	if (figure) {
-		console.log(figure.getAvailableMoves(game));
 	}
 };

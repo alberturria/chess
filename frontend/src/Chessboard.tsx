@@ -1,13 +1,18 @@
+import { useState } from "react";
 import { Square } from "../domain/Square";
 import "./Chessboard.css";
 import { useChess } from "./hooks/use-chess";
 import Tile from "./Tile";
 
 export default function Chessboard() {
+	const [possibleMoves, setPossibleMoves] = useState<Square[]>([]);
 	const rows = "87654321".split("");
-	const cols = "abcdefgh".split("");
+	const cols = "ABCDEFGH".split("");
 
 	const game = useChess();
+	const onMoveSelected = (squares: Square[]) => {
+		setPossibleMoves(squares);
+	};
 
 	return (
 		<div className="chessboard">
@@ -26,6 +31,10 @@ export default function Chessboard() {
 							isDark={isDark}
 							figure={figure}
 							game={game}
+							isPossibleToMove={possibleMoves.some(
+								(square) => square.column === col && square.row === parseInt(row)
+							)}
+							onMoveSelected={onMoveSelected}
 						/>
 					);
 				})
